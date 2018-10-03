@@ -62,14 +62,14 @@ public:
 template <class ValType>
 TVector<ValType>::TVector(int s, int si)
 {
-	if ((s <= 0) || s > MAX_MATRIX_SIZE))
-	if ((si < 0) || (si >= s))trhow - 1;
+	if ((s <= 0) || (s > MAX_MATRIX_SIZE))
+	if ((si < 0) || (si >= s))throw - 1;
 	Size = s;
 	StartIndex = si;
-	pVector = new ValType[Size - StartIndex]
+	pVector = new ValType[Size - StartIndex];
 	for (int i = 0; i < (Size - StartIndex); i++)
 	{
-		pVector[i] = v.pVector[i];
+		pVector[i] = 0;
 	}
 };/*-------------------------------------------------------------------------*/
 
@@ -93,7 +93,7 @@ TVector<ValType>::~TVector()
 template <class ValType> // доступ
 ValType& TVector<ValType>::operator[](int pos)
 {
-	if((pos<StartIndex) || (pos>=size))throw -2;
+	if((pos<StartIndex) || (pos>=Size))throw -2;
 	return pVector[pos];
 } /*-------------------------------------------------------------------------*/
 
@@ -199,15 +199,15 @@ public:
 };
 
 template <class ValType>
-TMatrix<ValType>::TMatrix(int s): TVector<TVector<ValType> >(s)
+TMatrix<ValType>::TMatrix(int s): TVector<TVector<ValType>>(s)
 {
-	if ((s <= 0) || (s > MAX_MATRIS_SIZE))throw - 1;
+	/*if ((s <= 0) || (s > MAX_MATRIX_SIZE))throw - 1;
 	Size = s;
 	StartIndex = 0;
-	for (int i = 0; i < Size - StartIndex; i++)
+	for (int i = 0; i < (Size - StartIndex); i++)
 	{
 		pVector[i] = TVector(Size, i);
-	}
+	}*/
 } /*-------------------------------------------------------------------------*/
 
 template <class ValType> // конструктор копирования
