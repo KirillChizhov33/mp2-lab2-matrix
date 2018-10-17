@@ -127,6 +127,7 @@ TEST(TVector, compare_equal_vectors_return_true)
 	TVector<int> Vector1(Size);
 	TVector<int> Vector2(Size);
 	//Vector2[7] = 3; Test failed
+
 	ASSERT_EQ(Vector1, Vector2);
 }
 

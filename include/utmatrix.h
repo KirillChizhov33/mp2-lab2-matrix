@@ -239,7 +239,7 @@ TMatrix<ValType>::TMatrix(int s) : TVector<TVector<ValType>>(s)
 	}
 	Size = s;
 	StartIndex = 0;
-	//pVector = new TVector<ValType>[Size];
+	pVector = new TVector<ValType>[Size];
 	for (int i = 0; i < (Size - StartIndex); i++)
 	{
 		pVector[i] = TVector<ValType>(Size, i);//перегружен оператор =, верхняя треугольная матрица
@@ -256,7 +256,7 @@ bool TMatrix<ValType>::operator==(const TMatrix<ValType> &mt) const
 {
 	if (Size != mt.Size)
 		return false;
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < Size; i++)
 	{
 		if (pVector[i] != pVector[i])
 			return false;
@@ -271,13 +271,13 @@ bool TMatrix<ValType>::operator!=(const TMatrix<ValType> &mt) const
 
 } /*-------------------------------------------------------------------------*/
 template <class ValType> // присваивание
-TMatrix<ValType>& TMatrix<ValType>::operator=(const TMatrix<ValType> &mt)
+TMatrix<ValType> & TMatrix<ValType>::operator=(const TMatrix<ValType> &mt)
 {
 	if (*this == mt)
 		return *this;
-	delete[]pVecror;
+	delete[]pVector;
 	Size = mt.Size;
-	pVector = new TVector<TVector<ValType>>[Size];
+	pVector = new TVector<ValType>[Size];
 	for (int i = 0; i < Size; i++)
 	{
 		pVector[i] = mt.pVector[i];

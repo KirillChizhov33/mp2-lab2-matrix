@@ -26,67 +26,115 @@ TEST(TMatrix, can_create_copied_matrix)
 
 TEST(TMatrix, copied_matrix_is_equal_to_source_one)
 {
-  ADD_FAILURE();
+	const int Size = 100;
+	TMatrix<int> OriginalMatrix(Size), CopiedMatrix(Size);
+	for (int i = 0; i < Size; i++)
+	{
+		OriginalMatrix[i] = i;
+	}
+	CopiedMatrix = OriginalMatrix;
+
+	ASSERT_EQ(CopiedMatrix, OriginalMatrix);
 }
 
 TEST(TMatrix, copied_matrix_has_its_own_memory)
 {
-  ADD_FAILURE();
+	const int Size = 100;
+	TMatrix<int> OriginalMatrix(Size), CopiedMatrix(Size);
+
+	ASSERT_NE(&OriginalMatrix[0], &CopiedMatrix[0]);
 }
 
 TEST(TMatrix, can_get_size)
 {
-  ADD_FAILURE();
+	TMatrix<int> v(4);
+
+	EXPECT_EQ(4, v.GetSize());
 }
 
 TEST(TMatrix, can_set_and_get_element)
 {
-  ADD_FAILURE();
+	TMatrix<int> v(4);
+	TVector<int> m(16);
+	v[0] = TVector<int>(5, 2);
+
+	EXPECT_EQ(TVector<int>(5, 2), v[0]);
 }
 
 TEST(TMatrix, throws_when_set_element_with_negative_index)
 {
-  ADD_FAILURE();
+	TMatrix<int> v(4);
+
+	ASSERT_ANY_THROW(v[-2]);
 }
 
 TEST(TMatrix, throws_when_set_element_with_too_large_index)
 {
-  ADD_FAILURE();
+	TMatrix<int> v(4);
+
+	ASSERT_ANY_THROW(v[MAX_MATRIX_SIZE+1]);
 }
 
 TEST(TMatrix, can_assign_matrix_to_itself)
 {
-  ADD_FAILURE();
+	TMatrix<int> v(4);
+
+	ASSERT_NO_THROW(v == v);
 }
 
 TEST(TMatrix, can_assign_matrices_of_equal_size)
 {
-  ADD_FAILURE();
+	const int Size = 100;
+	TMatrix<int> Matrix1(Size);
+	TMatrix<int> Matrix2(Size);
+
+	ASSERT_EQ(Matrix1, Matrix2);
 }
 
 TEST(TMatrix, assign_operator_change_matrix_size)
 {
-  ADD_FAILURE();
+	const int Size = 100;
+	TMatrix<int> Matrix1(Size);
+	TMatrix<int> Matrix2(Size + 1);
+	Matrix1 = Matrix2;
+
+	ASSERT_EQ(Matrix1, Matrix2);
 }
 
 TEST(TMatrix, can_assign_matrices_of_different_size)
 {
-  ADD_FAILURE();
+	const int Size = 100;
+	TMatrix<int> Matrix1(Size);
+	TMatrix<int> Matrix2(Size + 1);
+
+	ASSERT_NO_THROW(Matrix1 = Matrix2);
 }
 
 TEST(TMatrix, compare_equal_matrices_return_true)
 {
-  ADD_FAILURE();
+	const int Size = 100;
+	TMatrix<int> Matrix1(Size);
+	TMatrix<int> Matrix2(Size);
+	
+	ASSERT_EQ(Matrix1, Matrix2);
 }
+
 
 TEST(TMatrix, compare_matrix_with_itself_return_true)
 {
-  ADD_FAILURE();
+	const int Size = 100;
+	TMatrix<int> Matrix1(Size);
+
+	ASSERT_NO_THROW(Matrix1 == Matrix1);
 }
 
 TEST(TMatrix, matrices_with_different_size_are_not_equal)
 {
-  ADD_FAILURE();
+	const int Size = 100;
+	TVector<int> Matrix1(Size);
+	TVector<int> Matrix2(Size + 1);
+
+	ASSERT_NE(Matrix1, Matrix2);
 }
 
 TEST(TMatrix, can_add_matrices_with_equal_size)
