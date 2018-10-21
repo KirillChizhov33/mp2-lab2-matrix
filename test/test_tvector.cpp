@@ -39,7 +39,7 @@ TEST(TVector, copied_vector_is_equal_to_source_one)
 	}
 	CopiedVector = OriginalVector;
 
-	ASSERT_EQ(CopiedVector, OriginalVector);
+	EXPECT_EQ(CopiedVector, OriginalVector);
 }
 
 TEST(TVector, copied_vector_has_its_own_memory)
@@ -47,7 +47,7 @@ TEST(TVector, copied_vector_has_its_own_memory)
 	const int Size = 100;
 	TVector<int> OriginalVector(Size), CopiedVector(Size);
 
-	ASSERT_NE(&OriginalVector[0], &CopiedVector[0]);
+	EXPECT_NE(&OriginalVector[0], &CopiedVector[0]);
 }
 
 TEST(TVector, can_get_size)
@@ -99,7 +99,7 @@ TEST(TVector, can_assign_vectors_of_equal_size)
 	TVector<int> Vector1(Size);
 	TVector<int> Vector2(Size);
 
-	ASSERT_EQ(Vector1, Vector2);
+	EXPECT_EQ(Vector1, Vector2);
 }
 
 TEST(TVector, assign_operator_change_vector_size)
@@ -109,7 +109,7 @@ TEST(TVector, assign_operator_change_vector_size)
 	TVector<int> Vector2(Size + 1);
 	Vector2 = Vector1;
 
-	ASSERT_EQ(Vector1, Vector2);//ASSERT_EQ(Size, Vector2.GetSize()) Ёквивалентны(≈сли вектора равны, то и длины равны);
+	EXPECT_EQ(Vector1, Vector2);//ASSERT_EQ(Size, Vector2.GetSize()) Ёквивалентны(≈сли вектора равны, то и длины равны);
 }
 
 TEST(TVector, can_assign_vectors_of_different_size)
@@ -127,8 +127,7 @@ TEST(TVector, compare_equal_vectors_return_true)
 	TVector<int> Vector1(Size);
 	TVector<int> Vector2(Size);
 	//Vector2[7] = 3; Test failed
-
-	ASSERT_EQ(Vector1, Vector2);
+	EXPECT_EQ(Vector1, Vector2);
 }
 
 TEST(TVector, compare_vector_with_itself_return_true)
@@ -145,7 +144,7 @@ TEST(TVector, vectors_with_different_size_are_not_equal)
 	TVector<int> Vector1(Size);
 	TVector<int> Vector2(Size + 1);
 
-	ASSERT_NE(Vector1, Vector2);
+	EXPECT_NE(Vector1, Vector2);
 }
 
 TEST(TVector, can_add_scalar_to_vector)
