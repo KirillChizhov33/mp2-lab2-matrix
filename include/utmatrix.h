@@ -39,13 +39,13 @@ public:
 											  // ввод-вывод
 	friend istream& operator>>(istream &in, TVector &v)
 	{
-		for (int i = 0; v.Size < v.StartIndex; i++)
+		for (int i = 0; i < (v.Size - v.StartIndex); i++)
 			in >> v.pVector[i];
 		return in;
 	}
 	friend ostream& operator<<(ostream &out, const TVector &v)
 	{
-		for (int i = 0; v.Size < v.StartIndex; i++)
+		for (int i = 0; i < (v.Size - v.StartIndex); i++)
 			out << v.pVector[i] << ' ';
 		return out;
 	}
@@ -71,11 +71,6 @@ TVector<ValType>::TVector(int s, int si)
 	{
 		pVector = new ValType[1];
 	}
-
-	for (int i = 0; i < (Size - StartIndex); i++)
-	{
-		pVector[i] = 0;
-	}
 };/*-------------------------------------------------------------------------*/
 template <class ValType> //конструктор копирования
 TVector<ValType>::TVector(const TVector<ValType> &v)
@@ -97,7 +92,7 @@ template <class ValType> // доступ
 ValType& TVector<ValType>::operator[](int pos)
 {
 	if ((pos<StartIndex) || (pos >= Size))throw - 2;
-	return pVector[pos];
+	return pVector[pos - StartIndex];
 } /*-------------------------------------------------------------------------*/
 template <class ValType> // сравнение
 bool TVector<ValType>::operator==(const TVector &v) const
@@ -217,7 +212,7 @@ public:
 	TMatrix  operator+ (const TMatrix &mt);        // сложение
 	TMatrix  operator- (const TMatrix &mt);        // вычитание
 												   // ввод / вывод
-	friend istream& operator>>(istream &in, TMatrix &mt)
+	friend istream & operator>>(istream &in, TMatrix &mt)
 	{
 		for (int i = 0; i < mt.Size; i++)
 			in >> mt.pVector[i];
@@ -273,13 +268,13 @@ bool TMatrix<ValType>::operator!=(const TMatrix<ValType> &mt) const
 template <class ValType> // присваивание
 TMatrix<ValType> & TMatrix<ValType>::operator=(const TMatrix<ValType> &mt)
 {
-	if (*this == mt)
+	if (this == &mt)// Почему нельзя (*this == mt)
 		return *this;
 	delete[]pVector;
 	Size = mt.Size;
 	StartIndex = mt.StartIndex;
 	pVector = new TVector<ValType>[Size - StartIndex];
-	for (int i = 0; i < Size - StartIndex; i++)
+	for (int i = 0; i < (Size - StartIndex); i++)
 	{
 		pVector[i] = mt.pVector[i];
 	}
@@ -292,10 +287,11 @@ TMatrix<ValType> TMatrix<ValType>::operator+(const TMatrix<ValType> &mt)
 	{
 		throw - 1;
 	}
-	TMatrix<ValType>  Res(Size - StartIndex);
+	TMatrix<ValType> Res(Size - StartIndex);
 	for (int i = 0; i < (Size - StartIndex); i++)
 	{
 		Res[i] = pVector[i] + mt.pVector[i];
+		cout << Res[i] << "\n";
 	}
 	return Res;
 } /*-------------------------------------------------------------------------*/

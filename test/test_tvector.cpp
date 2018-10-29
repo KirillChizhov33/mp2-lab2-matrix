@@ -109,7 +109,7 @@ TEST(TVector, assign_operator_change_vector_size)
 	TVector<int> Vector2(Size + 1);
 	Vector2 = Vector1;
 
-	EXPECT_EQ(Vector1, Vector2);//ASSERT_EQ(Size, Vector2.GetSize()) Ёквивалентны(≈сли вектора равны, то и длины равны);
+	EXPECT_EQ(Size, Vector2.GetSize());
 }
 
 TEST(TVector, can_assign_vectors_of_different_size)

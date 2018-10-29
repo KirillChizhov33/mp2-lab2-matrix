@@ -55,7 +55,6 @@ TEST(TMatrix, can_get_size)
 TEST(TMatrix, can_set_and_get_element)
 {
 	TMatrix<int> v(4);
-	TVector<int> m(16);
 	v[0] = TVector<int>(5, 2);
 
 	EXPECT_EQ(TVector<int>(5, 2), v[0]);
@@ -96,9 +95,9 @@ TEST(TMatrix, assign_operator_change_matrix_size)
 	const int Size = 100;
 	TMatrix<int> Matrix1(Size);
 	TMatrix<int> Matrix2(Size + 1);
-	Matrix1 = Matrix2;
+	Matrix2 = Matrix1;
 
-	EXPECT_EQ(Matrix1, Matrix2);
+	EXPECT_EQ(Size, Matrix2.GetSize());
 }
 
 TEST(TMatrix, can_assign_matrices_of_different_size)
@@ -139,7 +138,7 @@ TEST(TMatrix, matrices_with_different_size_are_not_equal)
 
 TEST(TMatrix, can_add_matrices_with_equal_size)
 {
-	const int Size = 100;
+	const int Size = 10;
 	TMatrix<int> Matrix1(Size);
 	TMatrix<int> Matrix2(Size);
 
